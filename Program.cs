@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,55 +9,101 @@ namespace Catalog_of_printers
 {
 	class Program
 	{
+		 
 		static void Main(string[] args)
 		{
 			
-			Console.WriteLine("1) Додати\n2) Змінити\n3) Видалити\n4) Показати всіх\n5) Пошук\n6) Вихід");// Главное меню
+			Server server = new Server();
 
-			int choice = int.Parse(Console.ReadLine());
-			Console.Clear();
-			switch (choice) // В зависимости от выбора пользователя, обращаемся к методу
+			while (true)
 			{
-				case 1:
-					Console.WriteLine("1) Додати Лазерний принтер 2) Додати струменевий принтер");
-					int choice1 = int.Parse(Console.ReadLine());
-					int k = 1;
-					int m = 2;
-					if (choice1 == k)
-					{
-						Server.AddLaser();
 
-					}
-					else if (choice1 == m)
-					{
-						Server.AddInkjet();
-					}
-                    else
-                    {
-						Console.WriteLine("Error! You should try again!");
-                    }
 
-					break;/*
+				Console.WriteLine("1) Add \n2) Edit\n3) Delete\n4) Show All \n5) Show only Laser printers\n6) Show only Inkjet printers\n7)");// Главное меню
+
+				int choice = int.Parse(Console.ReadLine());
+				Console.Clear();
+				switch (choice) // В зависимости от выбора пользователя, обращаемся к методу
+				{
+					case 1:
+						Console.WriteLine("1) Add laser printer 2) Add inkjet printer");
+						int choice1 = int.Parse(Console.ReadLine());
+						 
+						if (choice1 == 1)
+						{
+							server.AddLaser();
+							Console.WriteLine("Printer added successfully!");
+
+						}
+						else if (choice1 == 2)
+						{
+							server.AddInkjet();
+						}
+						else
+						{
+							Console.WriteLine("Error! You should try again!");
+						}
+
+						break;
 				case 2:
-					Change_delete(true); // Изменение в Листе и файле
+						Console.WriteLine("Chose a type of printer: 1)Laser printer; 2)Inkjet printer");
+						int choice2 = int.Parse(Console.ReadLine());
+
+						if (choice2 == 1)
+						{
+							server.EditLaser();
+						}
+						else if (choice2 == 2) 
+						{
+							server.EditInkjet();
+						}
+                        else
+                        {
+							Console.WriteLine("Eror");
+                        }
+						break;
+					case 3:
+						Console.WriteLine("1) Delete laser printer 2) Delete inkjet printer");
+						int choice3 = int.Parse(Console.ReadLine());
+						 
+						if (choice3 == 1)
+						{
+							server.DeleteLaser();
+						}
+						else if(choice3 == 2)
+						{
+							server.DeleteInkjet();
+                        }
+                        else
+                        {
+							Console.WriteLine("Eror");
+                        }
+							 // Удаление из листа и файла
+						break;
+					case 4:
+						server.ShowLaser();
+						server.ShowInkjet();// Отображение всех кто есть в базе
+						break;
+					case 5:
+					server.ShowLaser(); // Поиск по критериям
 					break;
-				case 3:
-					Change_delete(false); // Удаление из листа и файла
-					break;
-				case 4:
-					Show(); // Отображение всех кто есть в базе
-					break;
-				case 5:
-					Find(); // Поиск по критериям
-					break;
-				case 6:
-					goto exit; // Закрыть программу*/
-					Console.ReadKey();
+				    case 6:
+						server.ShowInkjet();
+						break;
+					case 7:
+						server.SortLaserPrice2();
+						break;
+					//goto exit; // Закрыть программу
+						//Console.ReadKey();
+				}
 			}
+			exit:
+			;
+
+
+
 		}
 
 	}
-
-
 }
   
