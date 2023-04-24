@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +11,11 @@ namespace Catalog_of_printers
     [XmlInclude(typeof(Printer))]
     public class Laser_printer : Printer
     {
+        public string color;
+
         public Printer Printer { get; set; }
 
-        string Color { get; set; }
+        
         public override bool Equals(object obj)
         {
             return obj is Laser_printer laser_printer &&
@@ -27,12 +29,12 @@ namespace Catalog_of_printers
                    Color == laser_printer.Color;
 
         }
-        public Laser_printer(  int id, string model, string manufacturer, string appointment, string print_size, double price, string color)
+        public Laser_printer(int id, string model, string manufacturer, string appointment, string print_size, double price, string color)
             : base(id, model, manufacturer, appointment, print_size, price)
         {
             Color = color;
         }
-
+        public string Color { get => color; set => color = value; }
 
         public override int GetHashCode()
         {
@@ -41,7 +43,7 @@ namespace Catalog_of_printers
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Color);
             return hashCode;
         }
-        public override string Cost_calculation()
+        public override int Cost_calculation()
         {
             string price_message;
             int sum = 5000;
@@ -49,9 +51,12 @@ namespace Catalog_of_printers
             {
                 Price = Price - (Price / 100) * 5;
             }
-            price_message = "до сплати" + Price;
-            return price_message;
-
+            price_message = "The price with 5% discount " + Price;
+            Console.WriteLine(price_message);
+            Console.WriteLine("===================================");
+            double pri = Price;
+            int pric = Convert.ToInt32(pri);
+            return pric;
         }
     }
 }
