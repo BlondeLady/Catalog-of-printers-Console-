@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,10 +58,12 @@ namespace Catalog_of_printers
             hashCode = hashCode * -1521134295 + EqualityComparer<double>.Default.GetHashCode(price);
             return hashCode;
         }
-        public virtual string Cost_calculation()
+        public virtual int Cost_calculation()
         {
             string price_message = "до сплати: " + Price;
-            return price_message;
+            double pri = Price;
+            int pric = Convert.ToInt32(pri);
+            return pric;
         }
 
 
